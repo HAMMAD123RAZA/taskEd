@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
+import { collection, getDocs } from 'firebase/firestore'
+import db from '../firebase/DbConfig'
 
 const Content = () => {
+const [course, setcourses] = useState([])
+const [search, setsearch] = useState('')
 
-  
+const fetchData=async()=>{
+  try {
+    const querySnapShot=await getDocs(collection(db,"courses"))
+    const fetchCours=querySnapShot.docs.map(doc=>({
+      id:doc.id,
+      ...doc.data()
+    }))
+    setcourses(fetchCours)
+  } catch (error) {
+   console.error("err in fetching",error) 
+  }
+}
+useEffect(()=>{
+  fetchData()
+},[])
+
+const filterData=course.filter((item)=>item.courseName.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <div>
@@ -19,9 +39,9 @@ const Content = () => {
  >Add New Course</Link>
 
       </div>
- <input type="text" placeholder='search...' className='border my-6 border-gray-400 rounded-xl p-2 w-1/3' />
+ <input type="text"         onChange={(e) => setSearch(e.target.value)}
+  placeholder='search...' className='border my-6 border-gray-400 rounded-xl p-2 w-1/3' />
 
-{/* data */}
 
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-black ">
@@ -51,39 +71,23 @@ const Content = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-white dark:border-white">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-black"
-            >
-              Apple MacBook Pro 17
-            </th>
-            <td className="px-6 py-4">Silver</td>
-            <td className="px-6 py-4">Laptop</td>
-            <td className="px-6 py-4">$2999</td>
-          </tr>
-          <tr className="bg-white border-b dark:bg-white dark:border-white">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium  whitespace-nowrap text-black"
-            >
-              Microsoft Surface Pro
-            </th>
-            <td className="px-6 py-4">White</td>
-            <td className="px-6 py-4">Laptop PC</td>
-            <td className="px-6 py-4">$1999</td>
-          </tr>
-          <tr className="bg-white dark:bg-white">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium  whitespace-nowrap text-black"
-            >
-              Magic Mouse 2
-            </th>
-            <td className="px-6 py-4">Black</td>
-            <td className="px-6 py-4">Accessories</td>
-            <td className="px-6 py-4">$99</td>
-          </tr>
+          {filterData.map((course)=>{
+            return(
+              <>
+               <tr key={course.id} className="bg-white border-b">
+                <td className="px-6 py-4 font-medium text-black">{course.courseName}</td>
+                <td className="px-6 py-4">{course.courseprice}</td>
+                <td className="px-6 py-4">{course.coursePrice}</td>
+                <td className="px-6 py-4">{course.discountStatus}</td>
+                <td className="px-6 py-4">{course.discountValue}</td>
+                <td className="px-6 py-4">{course.coursePrivateStatus
+                }</td>
+                <td className="px-6 py-4">{course.isFree ? "Yes" : "No"}</td>
+              </tr>
+              </>
+            )
+          })}
+       
         </tbody>
       </table>
     </div>
