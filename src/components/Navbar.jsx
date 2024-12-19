@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <div className='bg-gray-800 p-5 flex justify-end' >
+    <div className='bg-gray-700 p-5 flex justify-end ' >
     <div className="flex gap-6 items-center ">
 
     <div>
-      <div to="/create" className="flex gap-2 items-center">
+      <Link to="/create" className="flex gap-2 items-center">
         <FaPlus color="white" />
         <div className="text-white">Create Course</div>
-      </div>
+      </ Link>
     </div>
     <FaRegBell color='white'/>
 <img
