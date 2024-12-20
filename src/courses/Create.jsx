@@ -1,22 +1,25 @@
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import db from '../firebase/DbConfig';
+import Swal from "sweetalert2"
+
+
 
 const Create = () => {
   const [formData, setFormData] = useState({
-    courseName: '',
-    courseDuration: '',
-    coursePrice: '',
-    coursePrivateStatus: '',
-    courseLevel: '',
-    isFree: '',
-    discountStatus: '',
-    discountValue: '',
-    category: '',
-    subCategory: '',
-    courseShortDescription: '',
-    courseDescription: '',
-    requirements: '',
+    courseName: "",
+    courseDuration: "",
+    coursePrice: "",
+    coursePrivateStatus: "",
+    courseLevel: "",
+    isFree: "",
+    discountStatus: "",
+    discountValue: "",
+    category: "",
+    subCategory: "",
+    courseShortDescription: "",
+    courseDescription: "",
+    requirements: "",
   });
 
   const handleChange = (e) => {
@@ -28,7 +31,14 @@ const Create = () => {
     e.preventDefault();
     try {
       await addDoc(collection(db, "courses"), formData);
-      alert("Course added successfully!");
+
+      Swal.fire({
+        title: "Success!",
+        color:"gray",
+        text: "Course added successfully.",
+        icon: "success",
+      });
+
       setFormData({
         courseName: "",
         courseDuration: "",
@@ -45,10 +55,16 @@ const Create = () => {
         requirements: "",
       });
     } catch (error) {
-      console.error("Error adding course: ", error);
-      alert("Failed to add course.");
+      console.error("Error adding course:", error);
+
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to add course. Please try again.",
+        icon: "error",
+      });
     }
   };
+
 
   return (
     <form onSubmit={handleSubmit}>

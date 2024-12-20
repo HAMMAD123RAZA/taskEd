@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { doc, updateDoc } from 'firebase/firestore';
 import db from '../firebase/DbConfig';
+import Navbar from './Navbar';
+import Swal from "sweetalert2"
 
 const EditCourse = () => {
   const location = useLocation();
@@ -28,12 +30,31 @@ const EditCourse = () => {
       const courseRef = doc(db, 'courses', course.id);
       await updateDoc(courseRef, formData);
       navigate('/');
+      
+            Swal.fire({
+              title: "Success!",
+              color:"gray",
+              text: "Course Updated successfully.",
+              icon: "success",
+            });
+      
     } catch (error) {
       console.error('Error updating document:', error);
+      Swal.fire({
+        title: "error!",
+        color:"gray",
+        text: "Error In Updation.",
+        icon: "error",
+      });
+
     }
+    
+        
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="p-6">
       <h1 className="text-2xl font-bold">Edit Course</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,6 +108,7 @@ const EditCourse = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import db from '../firebase/DbConfig';
+import Swal from 'sweetalert2';
 
 const Content = () => {
   const [course, setCourses] = useState([]);
@@ -30,8 +31,22 @@ const Content = () => {
     try {
       await deleteDoc(doc(db, "courses", id));
       setCourses(course.filter((item) => item.id !== id));
+                  Swal.fire({
+                    title: "Success!",
+                    color:"gray",
+                    text: "Course deleted successfully.",
+                    icon: "success",
+                  });
+      
     } catch (error) {
       console.error("Error deleting document:", error);
+                  Swal.fire({
+                    title: "Opps!",
+                    color:"gray",
+                    text: "Error Deleting .",
+                    icon: "error",
+                  });
+      
     }
   };
 
