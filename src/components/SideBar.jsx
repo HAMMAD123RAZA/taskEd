@@ -8,6 +8,7 @@ import { IoMdVideocam } from 'react-icons/io'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { FaPlus } from "react-icons/fa6";
 import { FaRegBell } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   return (
@@ -56,9 +57,9 @@ const SideBar = () => {
             </div>
             <div className="flex gap-2 items-center">
               <IoPeopleCircleOutline size={22} />
-              <a href="#" className="text-white my-3 nav-item">
-                Users
-              </a>
+              <Link to='/' className="text-white my-3 nav-item">
+                Courses
+              </Link>
             </div>
             <div className="flex gap-2 items-center">
                 <MdOutlinePeopleAlt size={22} color="white" />
@@ -71,7 +72,7 @@ const SideBar = () => {
                 <AiTwotoneDollar size={22} color="white" />
 
                 <a href="#" className=" text-white my-3 nav-item">
-                  Profile
+                  Earning
                 </a>
               </div>
 
@@ -79,7 +80,7 @@ const SideBar = () => {
                 <IoIosContact size={22} color="white" />
 
                 <a href="#" className=" text-white my-3 nav-item">
-                  Profile
+                  Contacts
                 </a>
               </div>
 

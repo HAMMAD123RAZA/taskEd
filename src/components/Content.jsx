@@ -62,9 +62,9 @@ const Content = () => {
     <div>
       <Navbar />
       <div className="flex justify-between items-center p-2">
-        <div>
+        <div className='m-3'>
           <p className="text-4xl font-bold">Courses</p>
-          <p>Manage Your Course List Here</p>
+          <p className='py-2'>Manage Your Course List Here</p>
         </div>
         <Link
           to="/create"
@@ -78,7 +78,7 @@ const Content = () => {
         type="text"
         onChange={(e) => setSearch(e.target.value)}
         placeholder="search..."
-        className="border my-6 border-gray-400 rounded-xl p-2 w-1/3"
+        className="border my-4 border-gray-400 rounded-xl m-3 p-2 w-1/3"
       />
 
       <div className="relative overflow-x-auto">
