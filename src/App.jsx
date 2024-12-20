@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Create from './courses/Create';
 import Content from './components/Content';
 import SideBar from './components/SideBar';
+import EditCourse from './components/EditCourse';
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Routes>
             <Route path="/create" element={<Create />} />
             <Route path="/" element={<Content />} />
+            <Route path="/edit/:id" element={<EditCourse />} />
+
           </Routes>
         </div>
       </BrowserRouter>
