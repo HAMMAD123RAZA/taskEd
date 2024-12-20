@@ -47,7 +47,7 @@ const SideBar = () => {
                 </div>
               </div>
 
-          {/* Other sections */}
+          {/* Menu sections */}
           <div className="flex flex-col flex-1 gap-3 ml-2">
             <div className="flex gap-2 items-center">
               <MdOutlineDashboardCustomize size={22} />
@@ -85,7 +85,6 @@ const SideBar = () => {
               </div>
 
 
-            {/* Add more menu items here */}
           </div>
         </nav>
       </div>

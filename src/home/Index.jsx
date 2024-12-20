@@ -12,7 +12,6 @@ const Index = () => {
       {/* Main Content Area */}
     
       <div className="flex flex-col flex-1 overflow-y-auto">
-        {/* Header */}
         
         {/* Content Section */}
         <div className="p-6">
